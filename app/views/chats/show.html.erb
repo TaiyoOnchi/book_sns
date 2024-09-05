@@ -1,0 +1,23 @@
+<h1><%= @followed_user.name %>さんとのチャット</h1>
+<table class='table'>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>message</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @chats.each do |chat| %>
+      <tr>
+        <td><%#= chat.user.name %></td>
+        <td><%= chat.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<h4>チャット作成</h4>
+<%= form_with model: @chat, url: user_relationships_chats_path(@followed_user), local: true do |f| %>
+    <%= f.text_field :body %>
+    <%#= f.submit class: 'btn btn-success' %>
+<% end %>

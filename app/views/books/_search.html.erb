@@ -1,0 +1,53 @@
+<%= search_form_for @q, url: search_books_path, method: :get, remote: true do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <%= f.label :title_cont, "タイトル", class: "small" %>
+      <%= f.search_field :title_cont, class: 'form-control form-control-sm' %>
+    </div>
+  
+    <div class="form-group col-md-4">
+      <%= f.label :body_cont, "意見", class: "small" %>
+      <%= f.search_field :body_cont, class: 'form-control form-control-sm' %>
+    </div>
+    
+    <div class="form-group col-md-4">
+      <%= f.label :user_name_cont, "ユーザー名", class: "small" %>
+      <%= f.search_field :user_name_cont, class: 'form-control form-control-sm' %>
+    </div>
+
+    <div class="form-group col-md-4">
+      <%= f.label :with_tag_name, "タグ", class: "small" %>
+      <%= f.select :with_tag_name, options_for_select(@tags), { include_blank: '選択してください' }, class: 'form-control form-control-sm' %>
+    </div>
+  
+    
+    <div class="form-group col-md-4">
+      <%= f.label :rating_eq, "評価", class: "small" %>
+      <div id="rating-selector"></div> <!-- 星評価のセレクタ -->
+      <%= f.hidden_field :rating_eq, id: 'rating_value' %> <!-- 評価値を格納する隠しフィールド -->
+    </div>
+    
+    <div class="form-group col-md-2 d-flex align-items-end">
+      <%= f.submit "検索", class: 'btn btn-primary btn-sm ' %>
+    </div>
+  </div>
+
+<% end %>
+
+<script>
+  document.addEventListener('turbolinks:load', function() {
+    var elem = document.querySelector('#rating-selector');
+    var ratingInput = document.querySelector('#rating_value');
+
+    var opt = {
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      scoreName: 'rating_eq',  // フィールド名を一致させる
+      score: ratingInput.value, // 初期値を設定
+      click: function(score, evt) {
+        ratingInput.value = score; // 星がクリックされたときに値を設定
+      }
+    };
+    raty(elem, opt);
+  });
+</script>

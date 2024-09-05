@@ -1,0 +1,9 @@
+<%= form_with url: search_path, local: false do |f| %>
+  <label for="selectedDate">日付選択:</label>
+  <%= f.date_field :selectedDate, id: 'selectedDate' %>
+  <%= f.submit '検索' %>
+<% end %>
+
+<% if books_num.present?%>
+  <p>投稿数: <%= books_num %></p>
+<% end %>

@@ -1,0 +1,17 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <h2>Event Mail</h2>
+    <%= form_with model: [@group, @event], local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :content %>
+        <%= f.text_area :content, class: "form-control" %>
+      </div>
+      <%= f.submit "送信", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

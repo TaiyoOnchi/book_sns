@@ -1,0 +1,2 @@
+$('.favorite-<%= @favorite.book_id %>').html("<%= j(render 'favorites/btn',  book: @favorite.book ) %>")
+$('.favorite').html("<%= j(render 'books/index',  books: @books = @user.books.sort_by { |book| -book.favorites.count } ) %>")

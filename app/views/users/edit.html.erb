@@ -1,0 +1,46 @@
+<div class='container'>
+  <div class='row'>
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+    <h2>User info</h2>
+    <%= form_with model:@user, local:true do |f| %>
+      <%= render 'layouts/errors', obj: @user %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control name" %>
+      </div>
+     <div class="form-group">
+        <%= f.label :image %>
+        <%= f.file_field :group_image, class: "form-control-file user_image", accept: 'image/*' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :introduction %>
+        <%= f.text_area :introduction, class: "form-control introduction" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :postcode, '郵便番号' %>
+        <%= f.text_field :postcode, autocomplete: 'postcode', class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :prefecture_name, '都道府県' %>
+        <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, { include_blank: '選択してください', selected: current_user.prefecture_code}, class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :address_city, '市区町村' %>
+        <%= f.text_field :address_city, autocomplete: 'address_city', class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :address_street, '番地' %>
+        <%= f.text_field :address_street, autocomplete: 'address_street', class: 'form-control' %>
+      </div>
+      <div class="field">
+        <%= f.label :address_building, '建物' %>
+        <%= f.text_field :address_building, autocomplete: 'address_building', class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-secondary' %>
+      </div>
+    <% end %>
+    <%= link_to 'パスワードを変更する', edit_user_registration_path %>
+  </div>
+</div>
